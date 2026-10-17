@@ -1,0 +1,1 @@
+export{SessionUpdateTransport as AcpGatewayTransport}from"../channel/shared/transport.js";

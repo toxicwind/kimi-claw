@@ -1,0 +1,1 @@
+const LOG_PREFIX="[kimi-bridge]",buildLogPrefix=i=>i?.instanceId?`${LOG_PREFIX}[instance_id=${i.instanceId}]`:LOG_PREFIX;export const buildLogger=(i,n,r)=>{const e=buildLogPrefix(r);return{info:n=>i.info(`${e} ${n}`),warn:n=>i.warn(`${e} ${n}`),error:n=>i.error(`${e} ${n}`),debug:r=>{n&&(i.debug?i.debug(`${e} ${r}`):i.info(`${e} ${r}`))}}};

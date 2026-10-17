@@ -1,0 +1,1 @@
+export{PromptConverter as AcpGatewayPromptConverter,extractPromptBlocks,parseKimiFileResourceLinkUri,resolveUriFileName}from"../channel/shared/prompt-converter.js";

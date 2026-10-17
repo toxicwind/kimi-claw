@@ -1,0 +1,1 @@
+export{ChannelSessionState as AcpGatewaySessionState}from"../channel/shared/session-state.js";

@@ -1,0 +1,1 @@
+import{Agent,fetch as undiciFetch}from"undici";const imRpcHttp1Dispatcher=new Agent({allowH2:!1});export const defaultImRpcFetch=async(t,c)=>await undiciFetch(t,{...c,dispatcher:imRpcHttp1Dispatcher});

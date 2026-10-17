@@ -1,0 +1,1 @@
+export{LocalSessionHistory as AcpGatewayLocalSessionHistory}from"../channel/shared/local-session-history.js";

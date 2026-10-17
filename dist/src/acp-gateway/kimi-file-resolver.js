@@ -1,0 +1,1 @@
+export{KimiFileResolver as AcpGatewayKimiFileResolver}from"../channel/shared/kimi-file-resolver.js";
