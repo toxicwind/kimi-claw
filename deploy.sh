@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # KimiClaw repair deploy — idempotent. Safe to re-run.
 # Deploys: bridge.ts, instances/kimiclaw-{a,b}.json, pitchfork daemons
-#          estate-scripts/kimiclaw-a and estate-scripts/kimiclaw-b (squawk fleet relays).
+#          Pens-scripts/kimiclaw-a and Pens-scripts/kimiclaw-b (squawk fleet relays).
 # Does NOT touch the bridge (awrawr-ws-exec) or any squawk process.
 set -euo pipefail
 
-KC_DIR="/home/toxic/pens/estate/tools/kimi-claw"
+KC_DIR="/home/toxic/pens/Pens/tools/kimi-claw"
 PF="/home/toxic/.local/share/mise/installs/pitchfork/latest/pitchfork"
 BUN="/home/toxic/.bun/bin/bun"
-TOML="/home/toxic/pens/estate/pitchfork.toml"
+TOML="/home/toxic/pens/Pens/pitchfork.toml"
 
 say() { echo "[deploy] $*"; }
 
@@ -50,10 +50,10 @@ done
 
 # --- 5. start (or confirm running) ---------------------------------------
 for inst in a b; do
-  if "$PF" status "estate-scripts/kimiclaw-$inst" 2>/dev/null | grep -q running; then
+  if "$PF" status "Pens-scripts/kimiclaw-$inst" 2>/dev/null | grep -q running; then
     say "kimiclaw-$inst already running"
   else
-    "$PF" start "estate-scripts/kimiclaw-$inst"
+    "$PF" start "Pens-scripts/kimiclaw-$inst"
     say "started kimiclaw-$inst"
   fi
 done

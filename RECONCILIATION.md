@@ -7,7 +7,7 @@ both boxes: hatch /tmp was wiped, and yote /tmp/kimiclaw-repair/ does not
 exist (yote uptime 1d17h — not a reboot; the staging was on hatch only).
 
 ## What was reconstructed (this tree)
-Source of truth for the rebuild: `/home/toxic/pens/estate/tools/kimi-claw/`
+Source of truth for the rebuild: `/home/toxic/pens/Pens/tools/kimi-claw/`
 - `dist/` (the real KimiClaw port: dist/src/config.js connector semantics,
   dist/src/session-routing.js session keys, dist/src/im/ transports)
 - `openclaw.plugin.json` (connector fields: bridge{url,userId,token,
@@ -15,7 +15,7 @@ Source of truth for the rebuild: `/home/toxic/pens/estate/tools/kimi-claw/`
   forwardToolCalls,cronSessionTarget,imBypassCommandNames,shell,terminalWs},
   gateway{url,clientId,clientMode,agentId})
 - Live OpenFang registry on :4200 (agents coyote, kimiclaw-1, kimiclaw-2 all
-  Running) and the estate-scripts/src/lib/openfang_api.ts chat surface
+  Running) and the Pens-scripts/src/lib/openfang_api.ts chat surface
   (POST :4200/v1/chat/completions with model `openfang:<agent>`).
 
 The pre-repair `bridge.ts` (Sep 17) was inspected and retired to
@@ -27,9 +27,9 @@ dead direct Coyote route on :25143, and imported a stale client path.
 2. Direct Coyote :25143 route REMOVED; coyote dispatches via the OpenFang
    agent `coyote` (`dispatchToCoyote`).
 3. Per-instance endpoints:
-   - kimiclaw-a → instanceId `estate-scripts-yote-kimiclaw-a`, transport
+   - kimiclaw-a → instanceId `Pens-scripts-yote-kimiclaw-a`, transport
      `im_rpc`, OpenFang agent `kimiclaw-1`, squawk `@kimiclaw-a`
-   - kimiclaw-b → instanceId `estate-scripts-yote-kimiclaw-b`, transport
+   - kimiclaw-b → instanceId `Pens-scripts-yote-kimiclaw-b`, transport
      `bridge_ws` (normalized to `im_rpc` at runtime per the port source's
      own `readDeprecatedOutboundTransport` + validation warning), OpenFang
      agent `kimiclaw-2`, squawk `@kimiclaw-b`
@@ -48,7 +48,7 @@ dead direct Coyote route on :25143, and imported a stale client path.
 
 ## Deployment
 `deploy.sh` (idempotent): bun build check → --check-route both instances →
-register `estate-scripts/kimiclaw-a` + `estate-scripts/kimiclaw-b` pitchfork daemons
+register `Pens-scripts/kimiclaw-a` + `Pens-scripts/kimiclaw-b` pitchfork daemons
 → start. pitchfork.toml backed up before edit. Bridge (awrawr-ws-exec) and
 all squawk processes untouched.
 
