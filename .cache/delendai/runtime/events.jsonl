@@ -1,0 +1,13 @@
+{"version":1,"ts":"2026-10-21T04:10:35.145Z","kind":"session.started","meta":{"mode":"managed","workspace":"/home/toxic/estate/ranch/kimi-claw"},"sessionId":"mvhlgmix-2a506f3117"}
+{"version":1,"ts":"2026-10-21T04:10:35.258Z","kind":"tool.started","toolName":"delendai_resolve_capability","sessionId":"mvhlgmix-2a506f3117"}
+{"version":1,"ts":"2026-10-21T04:10:35.261Z","kind":"tool.started","toolName":"delendai_adopt_project","sessionId":"mvhlgmix-2a506f3117"}
+{"version":1,"ts":"2026-10-21T04:10:35.279Z","kind":"tool.completed","toolName":"delendai_adopt_project","elapsedMs":17.55555100000015,"error":false,"estimatedTokens4B":5530,"sessionId":"mvhlgmix-2a506f3117"}
+{"version":1,"ts":"2026-10-21T04:10:35.279Z","kind":"tool.completed","toolName":"delendai_resolve_capability","elapsedMs":21.124602000000095,"error":false,"estimatedTokens4B":11536,"sessionId":"mvhlgmix-2a506f3117"}
+{"version":1,"ts":"2026-10-21T04:11:17.220Z","kind":"session.started","meta":{"mode":"managed","workspace":"/home/toxic/estate/ranch/kimi-claw"},"sessionId":"mvhlhizo-cdddef12e0"}
+{"version":1,"ts":"2026-10-21T04:11:17.300Z","kind":"tool.started","toolName":"delendai_overview","sessionId":"mvhlhizo-cdddef12e0"}
+{"version":1,"ts":"2026-10-21T04:11:17.307Z","kind":"tool.completed","toolName":"delendai_overview","elapsedMs":6.473163000000113,"error":false,"estimatedTokens4B":209,"sessionId":"mvhlhizo-cdddef12e0"}
+{"version":1,"ts":"2026-10-21T04:11:36.057Z","kind":"session.started","meta":{"mode":"managed","workspace":"/home/toxic/estate/ranch/kimi-claw"},"sessionId":"mvhlhxix-befa2b7f83"}
+{"version":1,"ts":"2026-10-21T04:11:36.310Z","kind":"tool.started","toolName":"delendai_overview","sessionId":"mvhlhxix-befa2b7f83"}
+{"version":1,"ts":"2026-10-21T04:11:36.322Z","kind":"tool.completed","toolName":"delendai_overview","elapsedMs":11.776810999999725,"error":false,"estimatedTokens4B":344,"sessionId":"mvhlhxix-befa2b7f83"}
+{"version":1,"ts":"2026-10-23T05:15:24.894Z","kind":"session.started","meta":{"mode":"managed","workspace":"/home/toxic/pens/ranch/kimi-claw"},"sessionId":"mvkinp7i-5bb0df7066"}
+{"version":1,"ts":"2026-10-23T05:16:57.329Z","kind":"session.started","meta":{"mode":"managed","workspace":"/home/toxic/pens/ranch/kimi-claw"},"sessionId":"mvkipoj5-a8975506b4"}

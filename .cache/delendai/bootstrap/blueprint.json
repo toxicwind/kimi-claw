@@ -1,0 +1,168 @@
+{
+	"generatedAt": "2026-10-21T04:10:35.228Z",
+	"blueprint": {
+		"serverName": "mcp-project-kimi",
+		"namespacePrefix": "kimi",
+		"targetDir": ".",
+		"projectType": "library",
+		"plugins": [
+			"rules"
+		],
+		"tools": [
+			{
+				"name": "check_project_state",
+				"description": "Single source of truth the agent calls first each turn: returns conventions, gates and what to do next."
+			},
+			{
+				"name": "get_validation_matrix",
+				"description": "Returns the quality-gate commands per scope."
+			},
+			{
+				"name": "audit_public_api",
+				"description": "Flags breaking changes to the exported surface."
+			},
+			{
+				"name": "run_test",
+				"description": "Run the project's test command and return a structured pass/fail report."
+			},
+			{
+				"name": "run_build",
+				"description": "Run the project's build command and return a structured pass/fail report."
+			},
+			{
+				"name": "run_clean",
+				"description": "Run the project's clean command and return a structured pass/fail report."
+			},
+			{
+				"name": "run_build:internal",
+				"description": "Run the project's build:internal command and return a structured pass/fail report."
+			},
+			{
+				"name": "run_build:public",
+				"description": "Run the project's build:public command and return a structured pass/fail report."
+			},
+			{
+				"name": "run_minify:release",
+				"description": "Run the project's minify:release command and return a structured pass/fail report."
+			},
+			{
+				"name": "run_generate:im-proto",
+				"description": "Run the project's generate:im-proto command and return a structured pass/fail report."
+			},
+			{
+				"name": "run_refresh:im-proto",
+				"description": "Run the project's refresh:im-proto command and return a structured pass/fail report."
+			},
+			{
+				"name": "run_refresh:im-proto:check",
+				"description": "Run the project's refresh:im-proto:check command and return a structured pass/fail report."
+			},
+			{
+				"name": "run_check:active-surface",
+				"description": "Run the project's check:active-surface command and return a structured pass/fail report."
+			},
+			{
+				"name": "run_test:cases",
+				"description": "Run the project's test:cases command and return a structured pass/fail report."
+			},
+			{
+				"name": "run_test:coverage:baseline",
+				"description": "Run the project's test:coverage:baseline command and return a structured pass/fail report."
+			}
+		],
+		"prompts": [
+			{
+				"name": "start",
+				"description": "Orient and start working in this project.",
+				"body": "You are working in **kimi-claw** (`library`, `javascript`).\n\nFirst call `kimi_overview` — it is the canonical map of this server's tools, plugins and a `recommendedNextAction`. Follow the recommendation.\n\n## Project shape\n\n- Type: `library`\n- Framework: _(none detected)_\n- Monorepo tool: _(none)_\n- Test runner: `unknown`\n- Package manager: `npm`\n\n## Quality gates\n\n- `test` → `node --experimental-transform-types --test tests/*.test.ts`\n- `build` → `npm run build:internal`\n- `clean` → `rm -rf dist`\n- `build:internal` → `npm run clean && tsc -p tsconfig.build.json && mkdir -p dist/src && cp src/message-filter.js dist/src/message-filter.js && npm run minify:release`\n- `build:public` → `npm run clean && tsc -p tsconfig.build.json && mkdir -p dist/src && cp src/message-filter.js dist/src/message-filter.js && npm run minify:release`\n- `minify:release` → `for file in $(find dist -type f -name '*.js'); do terser \"$file\" --compress passes=2,dead_code=true,drop_console=true,drop_debugger=true --mangle --format comments=false --output \"$file\" -- \"$file\"; done`\n- `generate:im-proto` → `node scripts/generate-im-proto.mjs`\n- `refresh:im-proto` → `node scripts/refresh-im-proto.mjs`\n- `refresh:im-proto:check` → `node scripts/refresh-im-proto.mjs --check`\n- `check:active-surface` → `node scripts/check-active-im-surface.mjs`\n- `test:cases` → `node --experimental-transform-types tests/acp-case-runner.ts`\n- `test:coverage:baseline` → `node --experimental-transform-types --experimental-test-coverage --test-coverage-include='src/**/*.ts' --test tests/*.test.ts`\n\n## When you change the project\n\n1. Re-run `kimi_analyze_project` to refresh the analysis.\n2. If the project grew (new scripts, new framework deps, new monorepo packages), call `kimi_plan_mcp_project` to refresh the blueprint and `kimi_create_project` to materialise the new tools.\n3. Never invent tool names; only call what `overview` lists."
+			},
+			{
+				"name": "fix quality",
+				"description": "Run the gates and fix what fails.",
+				"body": "Run the project quality gates in this order and fix what fails:\n1. `test` → `node --experimental-transform-types --test tests/*.test.ts`\n1. `build` → `npm run build:internal`\n1. `clean` → `rm -rf dist`\n1. `build:internal` → `npm run clean && tsc -p tsconfig.build.json && mkdir -p dist/src && cp src/message-filter.js dist/src/message-filter.js && npm run minify:release`\n1. `build:public` → `npm run clean && tsc -p tsconfig.build.json && mkdir -p dist/src && cp src/message-filter.js dist/src/message-filter.js && npm run minify:release`\n1. `minify:release` → `for file in $(find dist -type f -name '*.js'); do terser \"$file\" --compress passes=2,dead_code=true,drop_console=true,drop_debugger=true --mangle --format comments=false --output \"$file\" -- \"$file\"; done`\n1. `generate:im-proto` → `node scripts/generate-im-proto.mjs`\n1. `refresh:im-proto` → `node scripts/refresh-im-proto.mjs`\n1. `refresh:im-proto:check` → `node scripts/refresh-im-proto.mjs --check`\n1. `check:active-surface` → `node scripts/check-active-im-surface.mjs`\n1. `test:cases` → `node --experimental-transform-types tests/acp-case-runner.ts`\n1. `test:coverage:baseline` → `node --experimental-transform-types --experimental-test-coverage --test-coverage-include='src/**/*.ts' --test tests/*.test.ts`\n\nIf a gate is broken because of an external dep (downstream service, network, missing env), record it as `external-gate-blocker` with the evidence and continue."
+			}
+		],
+		"skills": [
+			{
+				"name": "project standards",
+				"description": "Closed stack and conventions of the project.",
+				"body": "## Project facts\n\n- Name: `kimi-claw`\n- Type: `library`\n- Language: `javascript`\n- Framework: `(none)`\n- Monorepo: `(none)`\n- Package manager: `npm`\n- Test runner: `unknown`\n- MCP server: _not detected_\n- CI: _(none detected)_\n- Agent configs already in repo: _(none detected)_\n\n## Language conventions\n\n- Use JSDoc for exported APIs; treat JSDoc types as a contract.\n\n",
+				"whenToUse": [
+					"Before writing or reviewing code in this project.",
+					"When a code review questions a project-wide convention."
+				]
+			}
+		],
+		"agents": [
+			{
+				"slot": "orchestrator",
+				"description": "Root orchestrator for this project."
+			}
+		],
+		"tests": true,
+		"hasExistingServer": false,
+		"adoptionStrategy": {
+			"mode": "replace",
+			"selectedCapabilities": [
+				"tools",
+				"prompts",
+				"resources",
+				"knowledge",
+				"skills",
+				"agents",
+				"mcp-config",
+				"proposal-workflow"
+			],
+			"operations": [
+				{
+					"capability": "tools",
+					"action": "replace"
+				},
+				{
+					"capability": "prompts",
+					"action": "replace"
+				},
+				{
+					"capability": "resources",
+					"action": "replace"
+				},
+				{
+					"capability": "knowledge",
+					"action": "replace"
+				},
+				{
+					"capability": "skills",
+					"action": "replace"
+				},
+				{
+					"capability": "agents",
+					"action": "replace"
+				},
+				{
+					"capability": "mcp-config",
+					"action": "replace"
+				},
+				{
+					"capability": "proposal-workflow",
+					"action": "replace"
+				}
+			],
+			"protectedCapabilities": [],
+			"requiresExplicitReplacementConsent": false
+		},
+		"defaults": {
+			"keepLegacy": false,
+			"reasons": [
+				"greenfield-safe default"
+			],
+			"warnings": []
+		},
+		"notes": [
+			"Guard the public barrel; treat exports as a contract.",
+			"Run typecheck + tests as the gate before publish.",
+			"No MCP server found: create one from this blueprint (scaffold the host project, then each tool/prompt/skill/agent).",
+			"Generate a test alongside each tool.",
+			"Recommended keepLegacy=false: greenfield-safe default."
+		]
+	}
+}
